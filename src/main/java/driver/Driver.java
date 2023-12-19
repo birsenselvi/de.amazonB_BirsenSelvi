@@ -11,6 +11,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Collections;
 
 
 public class Driver {
@@ -42,10 +43,11 @@ public class Driver {
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--remote-allow-origins=*");
                     options.addArguments("--start-maximized");
+
                     drivers.set(new ChromeDriver(options));
                     break;
             }
-        }waits.set(new WebDriverWait(drivers.get(), Duration.ofSeconds(10), Duration.ofMillis(100)));
+        }waits.set(new WebDriverWait(drivers.get(), Duration.ofSeconds(20), Duration.ofMillis(1000)));
         return drivers.get();
     }
 

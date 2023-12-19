@@ -1,11 +1,9 @@
 package stepdefs;
 
-import driver.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import pageObjects.HomePage;
 import pageObjects.ProduktPage;
@@ -39,21 +37,20 @@ public class ProductPage_StepDefs {
     @And("ich sehe, dass das Dropdown erscheint")
     public void ichSeheDassDasDropdownErscheint() {
 
-        produkt.selectIsVisible();
+        produkt.selectIsVisible1();
 
     }
 
     @Then("ich klicke auf das DropDown die Katagorie Küche, Haushalt & Wohnen")
     public void ichKlickeAufDasDropDownDieKatagorieKücheHaushaltWohnen() {
-
-       base.click(produkt.getSelectKatagorieStream("Küche, Haushalt & Wohnen"));
+       base.click(produkt.getSelectKatagorieStream("Küche"));
 
     }
 
     @And("ich sehe, dass den DropDown geschloßen wird")
     public void ichSeheDassDenDropDownGeschloßenWird() {
 
-        produkt.selectIsInVisible("Küche, Haushalt & Wohnen");
+        produkt.selectIsInVisible();
 
     }
 
@@ -72,19 +69,33 @@ public class ProductPage_StepDefs {
     @And("Ich sehe die Liste der eingeschränkten Staubsauger")
     public void ichSeheDieListeDerEingeschränktenStaubsauger() {
 
-        base.waitForVisibility(produkt.textIsVisiblee("Staubsauger"));
+       // base.waitForVisibility(produkt.textIsVisiblee("Staubsauger"));
+          produkt.getProduktAssert("staubsauger");
 
     }
 
-    @And("Ich sehe Marke, Preis, Staubsauger Art, Verfügbarkeit und weitere Filteroptionen")
-    public void ichSeheMarkePreisStaubsaugerArtVerfügbarkeitUndWeitereFilteroptionen() {
+    @And("Ich sehe Marke Filteroption")
+    public void ichSeheMarkeFilteroption() {
 
         base.waitForVisibility(produkt.getOfOptionenBold("Marke"));
-        base.waitForVisibility(produkt.getOfOptionenBold("Preis"));
-        base.waitForVisibility(produkt.getOfOptionenBold("Verfügbarkeit"));
-        base.waitForVisibility(produkt.getOfOptionenBold("Staubsauger Art"));
 
     }
+    @And("Ich sehe Preis Filteroption")
+    public void ichSehePreisFilteroption() {
+
+        base.waitForVisibility(produkt.getOfOptionenBold("Preis"));
+    }
+    @And("Ich sehe Verfügbarkeit Filteroption")
+    public void ichSeheVerfügbarkeitFilteroption() {
+
+        base.waitForVisibility(produkt.getOfOptionenBold("Verfügbarkeit"));
+    }
+    @And("Ich sehe weitere Filteroptionen")
+    public void ichSeheWeitereFilteroptionen() {
+
+        base.waitForVisibility(produkt.getOfOptionenBold("Staubsauger Art"));
+    }
+
 
     @And("ich sehe, dass der Text Katagorie fetter wirddes Staubsaugers")
     public void ichSeheDassDerTextKatagorieFetterWirddesStaubsaugers() {
@@ -95,7 +106,7 @@ public class ProductPage_StepDefs {
 
     @Then("ich klicke unten dem Marke Filtreoption auf Bosch Hausgeräte")
     public void ichKlickeUntenDemMarkeFiltreoptionAufBoschHausgeräte() {
-        base.click(produkt.getFiltreOptionen("Rowenta"));
+        base.click(produkt.getFiltreOptionen("AEG"));
     }
 
     @And("ich sehe die Meldung Seitenzahl von Produktmenge Ergebnissen oder Vorschlägen für staubsauger")
@@ -103,13 +114,18 @@ public class ProductPage_StepDefs {
 
         base.waitForVisibility(produkt.textIsVisiblee("für"));
 
+    }
+    @And("ich sehe die Meldung staubsauger")
+    public void ichSeheDieMeldungStaubsauger() {
+
+        base.waitForVisibility(produkt.textIsVisiblee("staubsauger"));
 
     }
 
     @And("ich sehe, dass der Text Marke fetter wird")
     public void ichSeheDassDerTextMarkeFetterWird() {
 
-        base.waitForVisibility(produkt.getOfOptionenBold("Rowenta"));
+        base.waitForVisibility(produkt.getOfOptionenBold("AEG"));
     }
 
     @Then("ich klicke unten dem Preis Filtreoption auf 200 bis 500 Euro")
@@ -130,7 +146,7 @@ public class ProductPage_StepDefs {
     public void ichSeheDassDieTexteDerAusgewähltenFilteroptionenMiteinanderKücheHaushaltWohnenBoschHausgeräteund200bis500EuroFetterWird() {
 
         base.waitForVisibility(produkt.getOfOptionenBold("Küche, Haushalt & Wohnen"));
-        base.waitForVisibility(produkt.getOfOptionenBold("Rowenta"));
+        base.waitForVisibility(produkt.getOfOptionenBold("AEG"));
         base.waitForVisibility(produkt.getOfOptionenBold("200 bis 500 EUR"));
 
 
@@ -143,25 +159,40 @@ public class ProductPage_StepDefs {
         base.click(produkt.textIsVisiblee("Sortieren nach:"));
 
     }
+    @And("ich sehe, dass das Soritieren Dropdown erscheint")
+    public void ichSeheDassDasSoritierenDropdownErscheint() {
+        produkt.selectSoritierenIsVisible();
+    }
 
-    @And("ich sehe, dass das DropDown mit fünf optionen \\(Empfohlen, Preis: Aufsteigend, Preis: Absteigend, Durchschn. Kundenbewertung und Neuheiten) erscheint")
-    public void ichSeheDassDasDropDownMitfünfOptionenEmpfohlenPreisspanneKundenbewertungVerfügbarkeitUndNeuheitenErscheint() {
+    @And("ich sehe, dass das DropDown mit Preis: Aufsteigend erscheint")
+    public void ichSeheDassDasDropDownMitPreisAufsteigendPreisspanneErscheint() {
 
-        produkt.sortierenDropDown("Empfohlen, Preis: Aufsteigend, Preis: Absteigend, Durchschn. Kundenbewertung Neuheiten");
+        produkt.verifyDisplayd("Preis: Aufsteigend");
+
+    }
+    @And("ich sehe, dass das DropDown mit Preis: Absteigend erscheint")
+    public void ichSeheDassDasDropDownMitPreisAbsteigendErscheint() {
+
+       produkt.verifyDisplayd("Preis: Absteigend");
 
     }
 
     @Then("ich klicke das DropDown Preis: Aufsteigend Sortieroption")
     public void ichKlickeDasDropDownAufsteigendSortieroption() {
 
-        base.click(produkt.sortierenDropDown.get(2));
+        base.click(produkt.getSortierenOption("Preis: Aufsteigend"));
     }
 
+    @And("ich sehe, dass den Soritieren DropDown geschloßen wird")
+    public void ichSeheDassDenSoritierenDropDownGeschloßenWird() {
+        produkt.selectSoritierenIsInVisible();
+
+    }
     @And("ich sehe die Liste der Produkte nach Preiserhöhung sortiert.")
     public void ichSeheDieListeDerProdukteNachPreiserhöhungSortiert() {
 
-       Utilities.sleep(2000);
-        produkt.getAbsteigendProduct();
+        Utilities.sleep(1000);
+        produkt.getAufsteigendProduct();
 
     }
 
@@ -190,7 +221,7 @@ public class ProductPage_StepDefs {
     }
     @And("ich sehe Preis")
     public void ichSehePreis() {
-        Utilities.sleep(1000);
+       // Utilities.sleep(1000);
         produkt.priceElement1();
     }
     @And("ich sehe Kundenbewertung")
@@ -204,4 +235,8 @@ public class ProductPage_StepDefs {
         produkt.getVideoToProdukt();
 
     }
+
+
+
+
 }

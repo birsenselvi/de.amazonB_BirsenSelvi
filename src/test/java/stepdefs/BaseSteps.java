@@ -25,8 +25,19 @@ public class BaseSteps {
     public void goToHome(){
 
         driver.navigate().to(PropertyReader.read("Config").get("url"));
-        driver.manage().addCookie(cookie);
-        driver.navigate().refresh();
+        try{
+            driver.manage().addCookie(cookie);
+            driver.navigate().refresh();
+        }catch(Exception e){
+            try {
+                driver.manage().addCookie(cookie);
+                driver.navigate().refresh();
+            }catch (Exception e1){
+                e1.printStackTrace();
+            }
+        }
+
+
 
     }
 
